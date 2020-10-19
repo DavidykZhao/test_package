@@ -4,5 +4,12 @@ __all__ = ['say_hello']
 
 # Cell
 def say_hello(to):
-    "Say hello to somebody, test"
-    return f'Hello {to}!'
+    '''
+    Say hello to somebody, test
+
+    Parameters:
+    to: [str] a name of string type to be greeted to
+
+    '''
+    number = np.random.randn(1)
+    return f'Hello {to}!' if number > 0.5 else f'yeah {to}'
