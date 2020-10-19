@@ -12,4 +12,4 @@ def say_hello(to):
 
     '''
     number = np.random.randn(1)
-    return f'Hello {to}!' if number > 0.5 else f'yeah {to}'
+    return f'Hello {to}!'
