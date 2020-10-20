@@ -2,9 +2,16 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_core.ipynb"}
+index = {"say_hello": "00_core.ipynb",
+         "ReadTabBatchIdentity": "tab_ae.ipynb",
+         "TabularPandasIdentity": "tab_ae.ipynb",
+         "TabDataLoaderIdentity": "tab_ae.ipynb",
+         "RecreatedLoss": "tab_ae.ipynb",
+         "BatchSwapNoise": "tab_ae.ipynb",
+         "TabularAE": "tab_ae.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "tabular_ae.py"]
 
 doc_url = "https://DavidykZhao.github.io/test_package/"
 
