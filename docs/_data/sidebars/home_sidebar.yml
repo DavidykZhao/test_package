@@ -16,6 +16,6 @@ entries:
       title: Custom Transforms and Dataloaders
       url: /tab_ae
     output: web
-    title: yikai_package
+    title: test_package
   output: web
   title: Sidebar
