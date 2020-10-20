@@ -5,11 +5,13 @@ __all__ = ['ReadTabBatchIdentity', 'TabularPandasIdentity', 'TabDataLoaderIdenti
 
 # Cell
 from fastai.tabular.all import *
+from fastcore import *
 
 # Cell
 class ReadTabBatchIdentity(ItemTransform):
     "Read a batch of data and return the inputs as both `x` and `y`"
-    def __init__(self, to): self.to = to
+    def __init__(self, to): #self.to = to
+        store_attr
 
     def encodes(self, to):
         if not to.with_cont: res = (tensor(to.cats).long(),) + (tensor(to.cats).long(),)

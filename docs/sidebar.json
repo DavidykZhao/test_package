@@ -2,6 +2,6 @@
   "test_package": {
     "Overview": "/",
     "Test to change the module name": "/core",
-    "Custom Transforms and Dataloaders": "/tab_ae"
+    "Tabular ae boilderplate": "/tab_ae"
   }
 }

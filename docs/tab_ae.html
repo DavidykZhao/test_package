@@ -1,6 +1,6 @@
 ---
 
-title: Custom Transforms and Dataloaders
+title: Tabular ae boilderplate
 
 keywords: fastai
 sidebar: home_sidebar
@@ -28,6 +28,13 @@ nb_path: "tab_ae.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These boilerplate code is learned from  <code>https://walkwithfastai.com/tab.ae</code>. I adopted and compiled here for better reuse for personal projects.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -145,37 +152,37 @@ nb_path: "tab_ae.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.383786</td>
-      <td>0.411906</td>
-      <td>0.818182</td>
+      <td>0.390005</td>
+      <td>0.421311</td>
+      <td>0.804515</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.363426</td>
-      <td>0.366876</td>
-      <td>0.826321</td>
+      <td>0.364785</td>
+      <td>0.375674</td>
+      <td>0.827856</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.355812</td>
-      <td>0.358577</td>
-      <td>0.836763</td>
+      <td>0.352750</td>
+      <td>0.368564</td>
+      <td>0.820792</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.350221</td>
-      <td>0.363955</td>
-      <td>0.835381</td>
+      <td>0.348078</td>
+      <td>0.366519</td>
+      <td>0.824171</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.346601</td>
-      <td>0.363953</td>
-      <td>0.828624</td>
+      <td>0.344458</td>
+      <td>0.365964</td>
+      <td>0.824324</td>
       <td>00:00</td>
     </tr>
   </tbody>
@@ -190,6 +197,12 @@ nb_path: "tab_ae.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Custom-Transforms-and-Dataloaders">Custom Transforms and Dataloaders<a class="anchor-link" href="#Custom-Transforms-and-Dataloaders"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -208,7 +221,7 @@ nb_path: "tab_ae.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ReadTabBatchIdentity" class="doc_header"><code>class</code> <code>ReadTabBatchIdentity</code><a href="https://github.com/DavidykZhao/yikai_package/tree/master/yikai_package/tab_ae.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ReadTabBatchIdentity</code>(<strong><code>to</code></strong>) :: <code>ItemTransform</code></p>
+<h2 id="ReadTabBatchIdentity" class="doc_header"><code>class</code> <code>ReadTabBatchIdentity</code><a href="https://github.com/DavidykZhao/test_package/tree/master/test_package/tab_ae.py#L11" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ReadTabBatchIdentity</code>(<strong><code>to</code></strong>) :: <code>ItemTransform</code></p>
 </blockquote>
 <p>Read a batch of data and return the inputs as both <code>x</code> and <code>y</code></p>
 
@@ -233,7 +246,7 @@ nb_path: "tab_ae.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TabularPandasIdentity" class="doc_header"><code>class</code> <code>TabularPandasIdentity</code><a href="https://github.com/DavidykZhao/yikai_package/tree/master/yikai_package/tab_ae.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularPandasIdentity</code>(<strong><code>df</code></strong>, <strong><code>procs</code></strong>=<em><code>None</code></em>, <strong><code>cat_names</code></strong>=<em><code>None</code></em>, <strong><code>cont_names</code></strong>=<em><code>None</code></em>, <strong><code>y_names</code></strong>=<em><code>None</code></em>, <strong><code>y_block</code></strong>=<em><code>None</code></em>, <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>do_setup</code></strong>=<em><code>True</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>inplace</code></strong>=<em><code>False</code></em>, <strong><code>reduce_memory</code></strong>=<em><code>True</code></em>) :: <code>TabularPandas</code></p>
+<h2 id="TabularPandasIdentity" class="doc_header"><code>class</code> <code>TabularPandasIdentity</code><a href="https://github.com/DavidykZhao/test_package/tree/master/test_package/tab_ae.py#L22" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularPandasIdentity</code>(<strong><code>df</code></strong>, <strong><code>procs</code></strong>=<em><code>None</code></em>, <strong><code>cat_names</code></strong>=<em><code>None</code></em>, <strong><code>cont_names</code></strong>=<em><code>None</code></em>, <strong><code>y_names</code></strong>=<em><code>None</code></em>, <strong><code>y_block</code></strong>=<em><code>None</code></em>, <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>do_setup</code></strong>=<em><code>True</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>inplace</code></strong>=<em><code>False</code></em>, <strong><code>reduce_memory</code></strong>=<em><code>True</code></em>) :: <code>TabularPandas</code></p>
 </blockquote>
 <p>A <code>Tabular</code> object with transforms</p>
 
@@ -265,7 +278,7 @@ nb_path: "tab_ae.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TabDataLoaderIdentity" class="doc_header"><code>class</code> <code>TabDataLoaderIdentity</code><a href="https://github.com/DavidykZhao/yikai_package/tree/master/yikai_package/tab_ae.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabDataLoaderIdentity</code>(<strong><code>dataset</code></strong>, <strong><code>bs</code></strong>=<em><code>16</code></em>, <strong><code>shuffle</code></strong>=<em><code>False</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong><code>do_setup</code></strong>=<em><code>True</code></em>, <strong><code>pin_memory</code></strong>=<em><code>False</code></em>, <strong><code>timeout</code></strong>=<em><code>0</code></em>, <strong><code>batch_size</code></strong>=<em><code>None</code></em>, <strong><code>drop_last</code></strong>=<em><code>False</code></em>, <strong><code>indexed</code></strong>=<em><code>None</code></em>, <strong><code>n</code></strong>=<em><code>None</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>wif</code></strong>=<em><code>None</code></em>, <strong><code>before_iter</code></strong>=<em><code>None</code></em>, <strong><code>after_item</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_iter</code></strong>=<em><code>None</code></em>, <strong><code>create_batches</code></strong>=<em><code>None</code></em>, <strong><code>create_item</code></strong>=<em><code>None</code></em>, <strong><code>create_batch</code></strong>=<em><code>None</code></em>, <strong><code>retain</code></strong>=<em><code>None</code></em>, <strong><code>get_idxs</code></strong>=<em><code>None</code></em>, <strong><code>sample</code></strong>=<em><code>None</code></em>, <strong><code>shuffle_fn</code></strong>=<em><code>None</code></em>, <strong><code>do_batch</code></strong>=<em><code>None</code></em>) :: <code>TabDataLoader</code></p>
+<h2 id="TabDataLoaderIdentity" class="doc_header"><code>class</code> <code>TabDataLoaderIdentity</code><a href="https://github.com/DavidykZhao/test_package/tree/master/test_package/tab_ae.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabDataLoaderIdentity</code>(<strong><code>dataset</code></strong>, <strong><code>bs</code></strong>=<em><code>16</code></em>, <strong><code>shuffle</code></strong>=<em><code>False</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong><code>do_setup</code></strong>=<em><code>True</code></em>, <strong><code>pin_memory</code></strong>=<em><code>False</code></em>, <strong><code>timeout</code></strong>=<em><code>0</code></em>, <strong><code>batch_size</code></strong>=<em><code>None</code></em>, <strong><code>drop_last</code></strong>=<em><code>False</code></em>, <strong><code>indexed</code></strong>=<em><code>None</code></em>, <strong><code>n</code></strong>=<em><code>None</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>wif</code></strong>=<em><code>None</code></em>, <strong><code>before_iter</code></strong>=<em><code>None</code></em>, <strong><code>after_item</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_iter</code></strong>=<em><code>None</code></em>, <strong><code>create_batches</code></strong>=<em><code>None</code></em>, <strong><code>create_item</code></strong>=<em><code>None</code></em>, <strong><code>create_batch</code></strong>=<em><code>None</code></em>, <strong><code>retain</code></strong>=<em><code>None</code></em>, <strong><code>get_idxs</code></strong>=<em><code>None</code></em>, <strong><code>sample</code></strong>=<em><code>None</code></em>, <strong><code>shuffle_fn</code></strong>=<em><code>None</code></em>, <strong><code>do_batch</code></strong>=<em><code>None</code></em>) :: <code>TabDataLoader</code></p>
 </blockquote>
 <p>A transformed <code>DataLoader</code> for AutoEncoder problems with Tabular data</p>
 
@@ -510,7 +523,7 @@ nb_path: "tab_ae.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="RecreatedLoss" class="doc_header"><code>class</code> <code>RecreatedLoss</code><a href="https://github.com/DavidykZhao/yikai_package/tree/master/yikai_package/tab_ae.py#L35" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RecreatedLoss</code>(<strong><code>cat_dict</code></strong>) :: <code>Module</code></p>
+<h2 id="RecreatedLoss" class="doc_header"><code>class</code> <code>RecreatedLoss</code><a href="https://github.com/DavidykZhao/test_package/tree/master/test_package/tab_ae.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RecreatedLoss</code>(<strong><code>cat_dict</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Measures how well we have created the original tabular inputs</p>
 
@@ -565,7 +578,7 @@ nb_path: "tab_ae.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BatchSwapNoise" class="doc_header"><code>class</code> <code>BatchSwapNoise</code><a href="https://github.com/DavidykZhao/yikai_package/tree/master/yikai_package/tab_ae.py#L61" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BatchSwapNoise</code>(<strong><code>p</code></strong>) :: <code>Module</code></p>
+<h2 id="BatchSwapNoise" class="doc_header"><code>class</code> <code>BatchSwapNoise</code><a href="https://github.com/DavidykZhao/test_package/tree/master/test_package/tab_ae.py#L63" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BatchSwapNoise</code>(<strong><code>p</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Swap Noise Module</p>
 
@@ -597,7 +610,7 @@ nb_path: "tab_ae.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TabularAE" class="doc_header"><code>class</code> <code>TabularAE</code><a href="https://github.com/DavidykZhao/yikai_package/tree/master/yikai_package/tab_ae.py#L80" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularAE</code>(<strong><code>emb_szs</code></strong>, <strong><code>n_cont</code></strong>, <strong><code>hidden_size</code></strong>, <strong><code>cats</code></strong>, <strong><code>low</code></strong>, <strong><code>high</code></strong>, <strong><code>ps</code></strong>=<em><code>0.2</code></em>, <strong><code>embed_p</code></strong>=<em><code>0.01</code></em>, <strong><code>bswap</code></strong>=<em><code>None</code></em>) :: <code>TabularModel</code></p>
+<h2 id="TabularAE" class="doc_header"><code>class</code> <code>TabularAE</code><a href="https://github.com/DavidykZhao/test_package/tree/master/test_package/tab_ae.py#L82" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TabularAE</code>(<strong><code>emb_szs</code></strong>, <strong><code>n_cont</code></strong>, <strong><code>hidden_size</code></strong>, <strong><code>cats</code></strong>, <strong><code>low</code></strong>, <strong><code>high</code></strong>, <strong><code>ps</code></strong>=<em><code>0.2</code></em>, <strong><code>embed_p</code></strong>=<em><code>0.01</code></em>, <strong><code>bswap</code></strong>=<em><code>None</code></em>) :: <code>TabularModel</code></p>
 </blockquote>
 <p>A simple AutoEncoder model</p>
 
@@ -696,57 +709,51 @@ nb_path: "tab_ae.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>2.964478</td>
-      <td>1.659597</td>
+      <td>2.899650</td>
+      <td>1.625434</td>
       <td>00:06</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>1.769170</td>
-      <td>1.034495</td>
+      <td>1.737672</td>
+      <td>1.192961</td>
       <td>00:06</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>1.250458</td>
-      <td>0.490667</td>
-      <td>00:07</td>
+      <td>1.228397</td>
+      <td>0.456219</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.969194</td>
-      <td>0.206732</td>
+      <td>0.950663</td>
+      <td>0.211868</td>
       <td>00:07</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.798623</td>
-      <td>0.176611</td>
+      <td>0.784797</td>
+      <td>0.163714</td>
       <td>00:07</td>
     </tr>
     <tr>
       <td>5</td>
-      <td>0.689279</td>
-      <td>0.145658</td>
+      <td>0.682265</td>
+      <td>0.138083</td>
       <td>00:07</td>
     </tr>
     <tr>
       <td>6</td>
-      <td>0.617521</td>
-      <td>0.131313</td>
+      <td>0.613905</td>
+      <td>0.135740</td>
       <td>00:07</td>
     </tr>
     <tr>
       <td>7</td>
-      <td>0.569696</td>
-      <td>0.112927</td>
+      <td>0.569463</td>
+      <td>0.138082</td>
       <td>00:07</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>0.541157</td>
-      <td>0.180281</td>
-      <td>00:08</td>
     </tr>
   </tbody>
 </table>
@@ -757,7 +764,7 @@ nb_path: "tab_ae.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>No improvement since epoch 7: early stopping
+<pre>No improvement since epoch 6: early stopping
 </pre>
 </div>
 </div>

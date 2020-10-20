@@ -13,7 +13,7 @@ entries:
       title: Test to change the module name
       url: /core
     - output: web,pdf
-      title: Custom Transforms and Dataloaders
+      title: Tabular ae boilderplate
       url: /tab_ae
     output: web
     title: test_package
