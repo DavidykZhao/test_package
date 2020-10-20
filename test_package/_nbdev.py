@@ -11,7 +11,7 @@ index = {"say_hello": "00_core.ipynb",
          "TabularAE": "tab_ae.ipynb"}
 
 modules = ["core.py",
-           "tabular_ae.py"]
+           "tab_ae.py"]
 
 doc_url = "https://DavidykZhao.github.io/test_package/"
 
