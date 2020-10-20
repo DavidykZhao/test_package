@@ -1,5 +1,5 @@
 {
-  "test_package": {
+  "yikai_package": {
     "Overview": "/",
     "Test to change the module name": "/core",
     "Tabular ae boilderplate": "/tab_ae"
