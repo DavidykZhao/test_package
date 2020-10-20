@@ -13,8 +13,8 @@ index = {"say_hello": "00_core.ipynb",
 modules = ["core.py",
            "tab_ae.py"]
 
-doc_url = "https://DavidykZhao.github.io/yikai_package/"
+doc_url = "https://DavidykZhao.github.io/test_package/"
 
-git_url = "https://github.com/DavidykZhao/yikai_package/tree/master/"
+git_url = "https://github.com/DavidykZhao/test_package/tree/master/"
 
 def custom_doc_links(name): return None
