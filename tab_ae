@@ -1,0 +1,426 @@
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.3-final"
+  },
+  "orig_nbformat": 2,
+  "kernelspec": {
+   "name": "Python 3.8.3 64-bit ('base': conda)",
+   "display_name": "Python 3.8.3 64-bit ('base': conda)",
+   "metadata": {
+    "interpreter": {
+     "hash": "dc31fd7c26e2425bbd851b0f8cbbcd5639dbbd39b944c75542f3e50c42eb2a32"
+    }
+   }
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2,
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%load_ext autoreload\n",
+    "%autoreload 2"
+   ]
+  },
+  {
+   "source": [
+    "from fastai.tabular.all import *"
+   ],
+   "cell_type": "code",
+   "metadata": {},
+   "execution_count": 1,
+   "outputs": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "display_data",
+     "data": {
+      "text/plain": "<IPython.core.display.HTML object>",
+      "text/html": "\n    <div>\n        <style>\n            /* Turns off some styling */\n            progress {\n                /* gets rid of default border in Firefox and Opera. */\n                border: none;\n                /* Needs to be in here for Safari polyfill so background images work as expected. */\n                background-size: auto;\n            }\n            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {\n                background: #F44336;\n            }\n        </style>\n      <progress value='0' class='' max='968212' style='width:300px; height:20px; vertical-align: middle;'></progress>\n      \n    </div>\n    "
+     },
+     "metadata": {}
+    }
+   ],
+   "source": [
+    "path = untar_data(URLs.ADULT_SAMPLE)\n",
+    "df = pd.read_csv(path/'adult.csv')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cat_names = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race']\n",
+    "cont_names = ['age', 'fnlwgt', 'education-num']\n",
+    "procs = [Categorify, FillMissing, Normalize]\n",
+    "y_names = 'salary'\n",
+    "y_block = CategoryBlock()\n",
+    "splits = RandomSplitter()(range_of(df))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "to = TabularPandas(df, procs = [Categorify, FillMissing, Normalize], cat_names=cat_names, cont_names=cont_names, \n",
+    "                   splits=splits, y_names=['salary'], y_block=CategoryBlock())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dls = to.dataloaders(bs=1024)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# train_dl = TabDataLoader(to.train, bs = 1280)\n",
+    "# valid_dl = TabDataLoader(to.valid, bs = 1280)\n",
+    "# dls = DataLoaders(train_dl, valid_dl)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "error",
+     "ename": "AssertionError",
+     "evalue": "`n_out` is not defined, and could not be infered from data, set `dls.c` or pass `n_out`",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-40-12f235fa3135>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mlearn\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mtabular_learner\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdls\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlayers\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m200\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m100\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmetrics\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0maccuracy\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mlearn\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfit\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m5\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m1e-2\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m~/opt/anaconda3/lib/python3.8/site-packages/fastcore/utils.py\u001b[0m in \u001b[0;36m_f\u001b[0;34m(*args, **kwargs)\u001b[0m\n\u001b[1;32m    448\u001b[0m         \u001b[0mlog_dict\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m{\u001b[0m\u001b[0;34m**\u001b[0m\u001b[0mfunc_args\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0marguments\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0;34m{\u001b[0m\u001b[0;34mf'{k} (not in signature)'\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0mv\u001b[0m \u001b[0;32mfor\u001b[0m \u001b[0mk\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mv\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mxtra_kwargs\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mitems\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    449\u001b[0m         \u001b[0mlog\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m{\u001b[0m\u001b[0;34mf'{f.__qualname__}.{k}'\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0mv\u001b[0m \u001b[0;32mfor\u001b[0m \u001b[0mk\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mv\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mlog_dict\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mitems\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;32mif\u001b[0m \u001b[0mk\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mbut\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 450\u001b[0;31m         \u001b[0minst\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0margs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;32mif\u001b[0m \u001b[0mto_return\u001b[0m \u001b[0;32melse\u001b[0m \u001b[0margs\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m0\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    451\u001b[0m         \u001b[0minit_args\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mgetattr\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0minst\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'init_args'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m{\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    452\u001b[0m         \u001b[0minit_args\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mupdate\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlog\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m~/opt/anaconda3/lib/python3.8/site-packages/fastai/tabular/learner.py\u001b[0m in \u001b[0;36mtabular_learner\u001b[0;34m(dls, layers, emb_szs, config, n_out, y_range, **kwargs)\u001b[0m\n\u001b[1;32m     33\u001b[0m     \u001b[0memb_szs\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mget_emb_sz\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdls\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtrain_ds\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m{\u001b[0m\u001b[0;34m}\u001b[0m \u001b[0;32mif\u001b[0m \u001b[0memb_szs\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mNone\u001b[0m \u001b[0;32melse\u001b[0m \u001b[0memb_szs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     34\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0mn_out\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mn_out\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mget_c\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdls\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 35\u001b[0;31m     \u001b[0;32massert\u001b[0m \u001b[0mn_out\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"`n_out` is not defined, and could not be infered from data, set `dls.c` or pass `n_out`\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     36\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0my_range\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mNone\u001b[0m \u001b[0;32mand\u001b[0m \u001b[0;34m'y_range'\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mconfig\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0my_range\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mconfig\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mpop\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'y_range'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     37\u001b[0m     \u001b[0mmodel\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mTabularModel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0memb_szs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdls\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcont_names\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mn_out\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlayers\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my_range\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0my_range\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mconfig\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: `n_out` is not defined, and could not be infered from data, set `dls.c` or pass `n_out`"
+     ]
+    }
+   ],
+   "source": [
+    "learn = tabular_learner(dls, layers=[200,100], metrics=[accuracy])\n",
+    "learn.fit(5, 1e-2)"
+   ]
+  },
+  {
+   "source": [
+    "# Custom Transforms and Dataloaders"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class ReadTabBatchIdentity(ItemTransform):\n",
+    "    \"Read a batch of data and return the inputs as both `x` and `y`\"\n",
+    "    def __init__(self, to): self.to = to\n",
+    "\n",
+    "    def encodes(self, to):\n",
+    "        if not to.with_cont: res = (tensor(to.cats).long(),) + (tensor(to.cats).long(),)\n",
+    "        else: res = (tensor(to.cats).long(),tensor(to.conts).float()) + (tensor(to.cats).long(), tensor(to.conts).float())\n",
+    "        if to.device is not None: res = to_device(res, to.device)\n",
+    "        return res\n",
+    "    \n",
+    "class TabularPandasIdentity(TabularPandas): pass"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@delegates()\n",
+    "class TabDataLoaderIdentity(TabDataLoader):\n",
+    "    \"A transformed `DataLoader` for AutoEncoder problems with Tabular data\"\n",
+    "    do_item = noops\n",
+    "    def __init__(self, dataset, bs=16, shuffle=False, after_batch=None, num_workers=0, **kwargs):\n",
+    "        if after_batch is None: after_batch = L(TransformBlock().batch_tfms)+ReadTabBatchIdentity(dataset)\n",
+    "        super().__init__(dataset, bs=bs, shuffle=shuffle, after_batch=after_batch, num_workers=num_workers, **kwargs)\n",
+    "\n",
+    "    def create_batch(self, b): return self.dataset.iloc[b]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TabularPandasIdentity._dl_type = TabDataLoaderIdentity"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "to = TabularPandasIdentity(df, [Categorify, FillMissing, Normalize], cat_names, cont_names, splits=RandomSplitter(seed=32)(df))\n",
+    "dls = to.dataloaders(bs=1024)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dls.n_inp = 2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import fastcore, fastai"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "{'workclass': 10,\n",
+       " 'education': 17,\n",
+       " 'marital-status': 8,\n",
+       " 'occupation': 16,\n",
+       " 'relationship': 7,\n",
+       " 'race': 6,\n",
+       " 'education-num_na': 3}"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 36
+    }
+   ],
+   "source": [
+    "total_cats = {k:len(v) for k,v in to.classes.items()}\n",
+    "total_cats"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "67"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 37
+    }
+   ],
+   "source": [
+    "sum([v for k,v in total_cats.items()])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "{'age': 38.5793696495067,\n",
+       " 'fnlwgt': 190006.02011593536,\n",
+       " 'education-num': 10.079158508963875}"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 38
+    }
+   ],
+   "source": [
+    "to.means"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "means = pd.DataFrame.from_dict({k:[v] for k,v in to.means.items()})\n",
+    "stds = pd.DataFrame.from_dict({k:[v] for k,v in to.stds.items()})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "low = (df[cont_names].min().to_frame().T.values - means.values) / stds.values\n",
+    "high = (df[cont_names].max().to_frame().T.values - means.values) / stds.values"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class RecreatedLoss(Module):\n",
+    "    \"Measures how well we have created the original tabular inputs\"\n",
+    "    def __init__(self, cat_dict):\n",
+    "        ce = CrossEntropyLossFlat(reduction='sum')\n",
+    "        mse = MSELossFlat(reduction='sum')\n",
+    "        #store_attr('cat_dict,ce,mse')\n",
+    "        self.cat_dict = cat_dict\n",
+    "        self.ce = ce\n",
+    "        self.mse = mse\n",
+    "\n",
+    "    def forward(self, preds, cat_targs, cont_targs):\n",
+    "        cats, conts = preds\n",
+    "        tot_ce, pos = cats.new([0]), 0\n",
+    "        for i, (k,v) in enumerate(self.cat_dict.items()):\n",
+    "            tot_ce += self.ce(cats[:, pos:pos+v], cat_targs[:,i])\n",
+    "            pos += v\n",
+    "        \n",
+    "        norm_cats = cats.new([len(self.cat_dict)])\n",
+    "        norm_conts = conts.new([conts.size(1)])\n",
+    "        cat_loss = tot_ce/norm_cats\n",
+    "        cont_loss = self.mse(conts, cont_targs)/norm_conts\n",
+    "        total = cat_loss+cont_loss\n",
+    "\n",
+    "        return total / cats.size(0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "loss_func = RecreatedLoss(total_cats)"
+   ]
+  },
+  {
+   "source": [
+    "## The model"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class BatchSwapNoise(Module):\n",
+    "    \"Swap Noise Module\"\n",
+    "    def __init__(self, p): store_attr()\n",
+    "\n",
+    "    def forward(self, x):\n",
+    "        if self.training:\n",
+    "            mask = torch.rand(x.size()) > (1 - self.p)\n",
+    "            l1 = torch.floor(torch.rand(x.size()) * x.size(0)).type(torch.LongTensor)\n",
+    "            l2 = (mask.type(torch.LongTensor) * x.size(1))\n",
+    "            res = (l1 * l2).view(-1)\n",
+    "            idx = torch.arange(x.nelement()) + res\n",
+    "            idx[idx>=x.nelement()] = idx[idx>=x.nelement()]-x.nelement()\n",
+    "            return x.flatten()[idx].view(x.size())\n",
+    "        else:\n",
+    "            return x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class TabularAE(TabularModel):\n",
+    "    \"A simple AutoEncoder model\"\n",
+    "    def __init__(self, emb_szs, n_cont, hidden_size, cats, low, high, ps=0.2, embed_p=0.01, bswap=None):\n",
+    "        super().__init__(emb_szs, n_cont, layers=[1024, 512, 256], out_sz=hidden_size, embed_p=embed_p, act_cls=Mish())\n",
+    "        \n",
+    "        self.bswap = bswap\n",
+    "        self.cats = cats\n",
+    "        self.activation_cats = sum([v for k,v in cats.items()])\n",
+    "        \n",
+    "        self.layers = nn.Sequential(*L(self.layers.children())[:-1] + nn.Sequential(LinBnDrop(256, hidden_size, p=ps, act=Mish())))\n",
+    "        \n",
+    "        if(bswap != None): self.noise = BatchSwapNoise(bswap)\n",
+    "        self.decoder = nn.Sequential(\n",
+    "            LinBnDrop(hidden_size, 256, p=ps, act=Mish()),\n",
+    "            LinBnDrop(256, 512, p=ps, act=Mish()),\n",
+    "            LinBnDrop(512, 1024, p=ps, act=Mish())\n",
+    "        )\n",
+    "        \n",
+    "        self.decoder_cont = nn.Sequential(\n",
+    "            LinBnDrop(1024, n_cont, p=ps, bn=False, act=None),\n",
+    "            SigmoidRange(low=low, high=high)\n",
+    "        )\n",
+    "        \n",
+    "        self.decoder_cat = LinBnDrop(1024, self.activation_cats, p=ps, bn=False, act=None)\n",
+    "        \n",
+    "    def forward(self, x_cat, x_cont=None, encode=False):\n",
+    "        if(self.bswap != None):\n",
+    "            x_cat = self.noise(x_cat)\n",
+    "            x_cont = self.noise(x_cont)\n",
+    "        encoded = super().forward(x_cat, x_cont)\n",
+    "        if encode: return encoded # return the representation\n",
+    "        decoded_trunk = self.decoder(encoded)\n",
+    "        decoded_cats = self.decoder_cat(decoded_trunk)\n",
+    "        decoded_conts = self.decoder_cont(decoded_trunk)\n",
+    "        return decoded_cats, decoded_conts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ]
+}

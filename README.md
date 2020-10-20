@@ -1,17 +1,10 @@
-# Test_lib introduction page
-> This is a test repo to familiar myself with nvdev functions
+# Yikai package introduction page
+> This is a a repo about useful functions Yikai has created or collected for more convenient personal use. If you have questions please contact Yikai for further details.
 
-
-This file will become your README and also the index of your documentation.
 
 ## Install
 
-`pip install your_project_name`
+`pip install yikai-package`
 
-## How to use
-
-Fill me in please! Don't forget code examples:
-
-- test 1
-- test2 
-- test 3
+More functions are being added to the package
+For docs, please visit `ykzhao.com/test_package/`
